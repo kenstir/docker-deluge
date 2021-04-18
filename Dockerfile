@@ -61,3 +61,4 @@ COPY root/ /
 # ports and volumes
 EXPOSE 8112 58846 58946 58946/udp
 VOLUME /config /downloads
+VOLUME /opt
