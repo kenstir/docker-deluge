@@ -34,6 +34,7 @@ RUN \
  pip install --no-cache-dir -U \
 	incremental \
 	crypto \
+	lxml \
 	mako \
 	markupsafe \
 	pyopenssl \
