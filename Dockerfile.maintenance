@@ -1,11 +1,8 @@
-FROM lsiobase/ubuntu:bionic
+# 2024-01-28 kenstir: copy of Dockerfile for me to perform maintenance on the state file, e.g.
+# video-utils/one-time-use/rewrite-deluge-state-file.py
 
-# set version label
-ARG BUILD_DATE
-ARG VERSION
-ARG DELUGE_VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="sparklyballs, aptalca"
+FROM lsiobase/ubuntu:bionic
+#FROM ubuntu:bionic
 
 # environment variables
 ENV PYTHON_EGG_CACHE="/config/plugins/.python-eggs"
@@ -59,6 +56,9 @@ RUN \
 
 # add local files
 COPY root/ /
+
+# kenstir: what happens if we remove the services files?
+RUN rm -rf /etc/services.d/deluged /etc/services.d/deluge-web
 
 # ports and volumes
 EXPOSE 8112 58846 58946 58946/udp
