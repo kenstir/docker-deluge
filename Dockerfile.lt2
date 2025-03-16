@@ -2,7 +2,7 @@
 
 FROM ghcr.io/linuxserver/unrar:latest AS unrar
 
-FROM ghcr.io/by275/libtorrent:1-alpine3.21 AS libtorrent
+FROM ghcr.io/by275/libtorrent:2.0.11-alpine3.21 AS libtorrent
 
 FROM ghcr.io/linuxserver/baseimage-alpine:3.21
 
@@ -16,7 +16,7 @@ ENV PYTHON_EGG_CACHE="/config/plugins/.python-eggs" \
 # copy the release version script
 COPY root/version.sh /app
 
-# install libtorrent v1
+# install libtorrent
 COPY --from=libtorrent /libtorrent-build/usr/lib/libtorrent-rasterbar.* /usr/lib/
 
 COPY --from=libtorrent /libtorrent-build/usr/lib/python3.12 /lsiopy/lib/python3.12

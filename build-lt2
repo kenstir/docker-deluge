@@ -1,0 +1,21 @@
+#!/bin/bash -
+
+set -e
+
+BUILD_DATE=$(date +%F)
+TAG=$(date +%F-%H-%M)
+IMAGE=kenstir/deluge-announce:lt2-$TAG
+LATEST_IMAGE=kenstir/deluge-announce:latest
+
+docker build \
+       -f Dockerfile.lt2 \
+       --build-arg VERSION=$TAG \
+       --build-arg BUILD_DATE=$BUILD_DATE \
+       -t $IMAGE -t $LATEST_IMAGE .
+echo built $IMAGE
+
+echo
+echo "    docker push $IMAGE"
+echo "    docker push $LATEST_IMAGE"
+echo "    perl -p -i -e 's,kenstir/deluge-announce:.*,$IMAGE,' /t/video-utils/docker/deluge-develop.yml"
+echo
